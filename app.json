@@ -1,0 +1,8 @@
+{
+  "name": "mocker-tester",
+  "description": "mocker-data-generator for test",
+  "repository": "",
+  "logo": "http://node-js-sample.herokuapp.com/node.svg",
+  "keywords": ["node", "express", "static"],
+  "image": "heroku/nodejs"
+}
