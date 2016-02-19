@@ -80,7 +80,7 @@ This project lives in heroku: [https://mocker-api.herokuapp.com](https://github.
   ```javascript
     //Structure
     [{name, schema, options}, {name, schema, options}, {name, schema, options}, ...]
-  
+
     //Example
         [{
           "name": "users",
@@ -108,7 +108,7 @@ This project lives in heroku: [https://mocker-api.herokuapp.com](https://github.
           },
           "options": 4
       }]
-  
+
       //Response
       {
       "users": [
@@ -161,6 +161,34 @@ This project lives in heroku: [https://mocker-api.herokuapp.com](https://github.
         "generationTime(seconds)": 0.002
       }
       }
+  ```
+##Curl Examples:
+
+[![asciicast](https://asciinema.org/a/36797.png)](https://asciinema.org/a/36797)
+
+- **_/schema/:name_**
+
+  ```bash
+  curl -i \
+  -H "Accept: application/json" \
+  -H "Content-Type:application/json" \
+  -X POST --data '{ "schema": { "firstName": { "faker": "name.firstName" }, "lastName": { "faker": "name.lastName" }, "country": { "faker": "address.country" }, "createdAt": { "faker": "date.past" } }, "options": 5 }' https://mocker-api.herokuapp.com/schema/users
+  ```
+
+  ```bash
+  curl -i \
+  -H "Accept: application/json" \
+  -H "Content-Type:application/json" \
+  -X POST --data '{ "schema": { "firstName": { "faker": "name.firstName" }, "lastName": { "faker": "name.lastName" }}, "options": 5 }' https://mocker-api.herokuapp.com/schema/users
+  ```
+
+- **_/schemas**
+
+  ```bash
+  curl -i \
+  -H "Accept: application/json" \
+  -H "Content-Type:application/json" \
+  -X POST --data '[{ "name": "users", "schema": { "firstName": { "faker": "name.firstName" }, "lastName": { "faker": "name.lastName" }, "country": { "faker": "address.country" }, "createdAt": { "faker": "date.past" } }, "options": 5 },{ "name": "cats", "schema": { "name":{ "values": ["pitxi", "txury", "kitty"] } }, "options": 4 }]' https://mocker-api.herokuapp.com/schemas
   ```
 
 ## Module Documentation
