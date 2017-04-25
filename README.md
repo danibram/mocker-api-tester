@@ -1,5 +1,7 @@
 # mocker-api-tester
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/danibram/mocker-api-tester.svg)](https://greenkeeper.io/)
+
 [![Support link][paypal-badge]][paypal-link]
 
 mocker-tester is the repository of the api deployed in heroku of this awesome module:
