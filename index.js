@@ -1,6 +1,5 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var m = require('mocker-data-generator');
 var app = express();
 
 app.set('port', (process.env.PORT || 5000));
@@ -10,7 +9,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 })); // for parsing application/x-www-form-urlencoded
 
-app.get('/', function(req, res) {
+app.get('/', function (req, res) {
   res.writeHead(200, {
     'Content-Type': 'text/html'
   });
@@ -18,15 +17,15 @@ app.get('/', function(req, res) {
   res.end();
 });
 
-app.post('/schema/:name', function(req, res) {
+app.post('/schema/:name', function (req, res) {
   var input = req.body;
 
   if (typeof input.options === 'object' || parseInt(input.options) > 0) {
     var opts = (typeof input.options === 'object') ? input.options : parseInt(input.options)
     var start = new Date()
-    require('mocker-data-generator')()
+    require('mocker-data-generator').default()
       .schema('mock', input.schema, opts)
-      .build(function(data) {
+      .build(function (err, data) {
         var result = {
           "metadata": {
             "count": data.mock.length,
@@ -42,10 +41,11 @@ app.post('/schema/:name', function(req, res) {
 
 });
 
-app.post('/schemas', function(req, res) {
-  var m = require('mocker-data-generator')()
+app.post('/schemas', function (req, res) {
+  var m = require('mocker-data-generator').default()
   var start = new Date()
-  req.body.map(function(sch) {
+  req.body.map(function (sch) {
+    console.log(sch)
     if (typeof sch.options === 'object' || parseInt(sch.options) > 0) {
       var opts = (typeof sch.options === 'object') ? sch.options : parseInt(sch.options)
       m.schema(sch.name, sch.schema, opts)
@@ -54,7 +54,7 @@ app.post('/schemas', function(req, res) {
     }
   })
 
-  m.build(function(data) {
+  m.build(function (err, data) {
     data.metadata = {
       "generationTime(seconds)": ((new Date().getTime() - start.getTime()) / 1000)
     }
@@ -62,6 +62,6 @@ app.post('/schemas', function(req, res) {
   })
 });
 
-app.listen(app.get('port'), function() {
+app.listen(app.get('port'), function () {
   console.log('Node app is running on port', app.get('port'));
 });
