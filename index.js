@@ -1,4 +1,5 @@
 var express = require('express');
+var package = require('./package.json');
 var bodyParser = require('body-parser');
 var app = express();
 
@@ -13,7 +14,7 @@ app.get('/', function (req, res) {
   res.writeHead(200, {
     'Content-Type': 'text/html'
   });
-  res.write('<h1>mocker-data-generator tester</h1><p>Hey! this is the mocker-data-generator tester. I configured 2 routes (POSTs routes): <br/> <br/> "/schema/:schemaName" you need to send a post and send in the body {schema, options}, is like the schema method of the module. <br/>"/schemas" you need to send an array of schemas [{name, schema, options} ...] <br/><br/>  Have fun!!! <br/><br/> <a href="https://github.com/danibram/mocker-api-tester/"> View api documentation </a><a href="http://danibram.github.io/mocker-data-generator/"> View module documentation </a> </p>');
+  res.write(`<h1>mocker-data-generator tester</h1><p>Hey! this is the mocker-data-generator tester. I configured 2 routes (POSTs routes): <br/> <br/> "/schema/:schemaName" you need to send a post and send in the body {schema, options}, is like the schema method of the module. <br/>"/schemas" you need to send an array of schemas [{name, schema, options} ...] <br/><br/>  Have fun!!! <br/><br/> <a href="https://github.com/danibram/mocker-api-tester/"> View api documentation </a><a href="http://danibram.github.io/mocker-data-generator/"> View module documentation </a> </p><br/>Using version ${package.version} of mocker-data-generator`);
   res.end();
 });
 
